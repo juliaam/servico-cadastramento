@@ -1,10 +1,16 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { RegisterController } from './interface-adapters/controllers/app.controller';
+import { GetClientsList_US } from './application[casos-de-uso]/get-client-list.use-case';
+import { PrismaClientRepository } from './interface-adapters/persistence[typeorm]/repositories/clients';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [RegisterController],
+  providers: [
+    GetClientsList_US,
+    {
+      provide: 'ClientRepository',
+      useClass: PrismaClientRepository,
+    },
+  ],
 })
 export class AppModule {}
