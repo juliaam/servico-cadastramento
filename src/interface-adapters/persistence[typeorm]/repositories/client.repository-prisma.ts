@@ -11,4 +11,12 @@ export class PrismaClientRepository implements ClientRepository {
     const clients = await prisma.cliente.findMany();
     return clients;
   }
+
+  async findById(id: Client['codigo']): Promise<Client> {
+    return await prisma.cliente.findFirst({
+      where: {
+        codigo: id,
+      },
+    });
+  }
 }
