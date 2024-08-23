@@ -5,8 +5,8 @@ export type UpdateCostParameters = {
   codApp: codApp;
   cost: number;
 };
-export interface AppRepository {
-  findAll(): Promise<App[]>;
-  findById(id: codApp): Promise<App>;
-  updateCost({ codApp, cost }: UpdateCostParameters): Promise<App>;
+export abstract class AppRepository {
+  abstract findAll(): Promise<App[]>;
+  abstract findById(id: codApp): Promise<App>;
+  abstract updateCost({ codApp, cost }: UpdateCostParameters): Promise<App>;
 }

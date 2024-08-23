@@ -17,18 +17,11 @@ import { App } from 'src/domain/entities/app.entity';
 import { SubscriptionDto } from '../dto/subscription.dto';
 import { AppDto } from '../dto/app.dto';
 import { UpdateCostApp_US } from 'src/application[casos-de-uso]/update-cost-app.use-case';
-import { Status } from 'src/domain/services/enums/subscription-status';
+// import { Status } from 'src/domain/services/enums/subscription-status';
 import { GetSubscriptionList_US } from 'src/application[casos-de-uso]/list-subscriptions.use-case';
 import { Subscription } from 'src/domain/entities/subscription.entity';
 
 @Controller('servcad')
-@Dependencies(
-  GetClientsList_US,
-  GetAppList_US,
-  CreateSubscription_US,
-  UpdateCostApp_US,
-  GetSubscriptionList_US,
-)
 export class RegisterController {
   constructor(
     private readonly getClientsList_US: GetClientsList_US,

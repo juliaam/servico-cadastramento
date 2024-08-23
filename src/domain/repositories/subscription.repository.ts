@@ -1,7 +1,6 @@
 import { Subscription } from '../entities/subscription.entity';
-// import { Status } from '../services/enums/subscription-status';
 
-export interface SubscriptionRepository {
-  create(body): Promise<Subscription>;
-  findAll(): Promise<Subscription[]>;
+export abstract class SubscriptionRepository {
+  abstract create(body): Promise<Subscription>;
+  abstract findAll(): Promise<Subscription[]>;
 }

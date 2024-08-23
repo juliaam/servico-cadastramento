@@ -1,15 +1,24 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Subscription } from 'src/domain/entities/subscription.entity';
-import { SubscriptionService } from 'src/domain/services/subscription.service';
+import { SubscriptionRepository } from 'src/domain/repositories/subscription.repository';
 
 @Injectable()
 export class GetSubscriptionList_US {
   constructor(
-    @Inject('SubscriptionService')
-    private readonly subscriptionService: SubscriptionService,
+    private readonly subscriptionRepository: SubscriptionRepository,
   ) {}
 
   async execute({ tipo }): Promise<Subscription[]> {
-    return this.subscriptionService.getByType(tipo);
+    const statusTypes = {
+      ATIVAS: 'ATIVAS',
+      TODAS: 'TODAS',
+      CANCELADAS: 'CANCELADAS',
+    };
+
+    const type = statusTypes[tipo];
+
+    if (type === 'TODAS') {
+      return await this.subscriptionRepository.findAll();
+    }
   }
 }
