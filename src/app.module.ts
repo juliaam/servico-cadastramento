@@ -6,9 +6,11 @@ import { GetAppList_US } from './application[casos-de-uso]/get-app-list.use-case
 
 import { PrismaClientRepository } from './interface-adapters/persistence[typeorm]/repositories/client.repository-prisma';
 import { PrismaAppRepository } from './interface-adapters/persistence[typeorm]/repositories/app.repository-prisma';
-import { SubscriptionService } from './domain/services/create-subscription.servicec';
+import { SubscriptionService } from './domain/services/subscription.service';
 import { CreateSubscription_US } from './application[casos-de-uso]/create-subscription.use-case';
 import { PrismaSubscriptionRepository } from './interface-adapters/persistence[typeorm]/repositories/subscription.repository-prisma';
+import { UpdateCostApp_US } from './application[casos-de-uso]/update-cost-app.use-case';
+import { AppService } from './domain/services/app.service';
 
 @Module({
   controllers: [RegisterController],
@@ -31,6 +33,15 @@ import { PrismaSubscriptionRepository } from './interface-adapters/persistence[t
     {
       provide: 'SubscriptionRepository',
       useClass: PrismaSubscriptionRepository,
+    },
+    {
+      provide: 'AppRepository',
+      useClass: PrismaAppRepository,
+    },
+    UpdateCostApp_US,
+    {
+      provide: 'AppService',
+      useClass: AppService,
     },
   ],
 })

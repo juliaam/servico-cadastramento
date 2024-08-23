@@ -3,9 +3,9 @@ import { IsInt, IsNotEmpty } from 'class-validator';
 export class SubscriptionDto {
   @IsInt()
   @IsNotEmpty()
-  readonly codApp: number;
+  codApp: number;
 
   @IsInt()
   @IsNotEmpty()
-  readonly codCli: number;
+  codCli: number;
 }

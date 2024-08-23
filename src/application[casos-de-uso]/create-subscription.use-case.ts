@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { Subscription } from 'src/domain/entities/subscription.entity';
-import { SubscriptionService } from 'src/domain/services/create-subscription.servicec';
+import { SubscriptionService } from 'src/domain/services/subscription.service';
 
 @Injectable()
 export class CreateSubscription_US {

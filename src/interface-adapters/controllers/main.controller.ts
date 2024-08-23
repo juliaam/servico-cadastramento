@@ -3,6 +3,7 @@ import {
   Controller,
   Dependencies,
   Get,
+  Param,
   Patch,
   Post,
 } from '@nestjs/common';
@@ -14,14 +15,22 @@ import { CreateSubscription_US } from 'src/application[casos-de-uso]/create-subs
 import { Client } from 'src/domain/entities/client.entity';
 import { App } from 'src/domain/entities/app.entity';
 import { SubscriptionDto } from '../dto/subscription.dto';
+import { AppDto } from '../dto/app.dto';
+import { UpdateCostApp_US } from 'src/application[casos-de-uso]/update-cost-app.use-case';
 
 @Controller('servcad')
-@Dependencies(GetClientsList_US, GetAppList_US, CreateSubscription_US)
+@Dependencies(
+  GetClientsList_US,
+  GetAppList_US,
+  CreateSubscription_US,
+  UpdateCostApp_US,
+)
 export class RegisterController {
   constructor(
     private readonly getClientsList_US: GetClientsList_US,
     private readonly getAppList_US: GetAppList_US,
     private readonly createSubscriotion_US: CreateSubscription_US,
+    private readonly updateCostApp_US: UpdateCostApp_US,
   ) {}
 
   @Get('clientes')
@@ -40,8 +49,14 @@ export class RegisterController {
   }
 
   @Patch('aplicativos/:idAplicativo')
-  updateCostApp(): string {
-    return '';
+  async updateCostApp(
+    @Param('idAplicativo') codApp: string,
+    @Body() body: AppDto,
+  ): Promise<App> {
+    return await this.updateCostApp_US.execute({
+      codApp: +codApp,
+      cost: body.custo,
+    });
   }
 
   @Get('assinaturas/{tipo}')

@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
-import { AppRepository } from 'src/domain/repositories/app.repository';
+import {
+  AppRepository,
+  UpdateCostParameters,
+} from 'src/domain/repositories/app.repository';
 import { App } from 'src/domain/entities/app.entity';
 import { prisma } from 'src/interface-adapters/persistence[typeorm]/database/prisma';
 
@@ -15,6 +18,17 @@ export class PrismaAppRepository implements AppRepository {
     return await prisma.aplicativo.findFirst({
       where: {
         codigo: id,
+      },
+    });
+  }
+
+  async updateCost({ codApp, cost }: UpdateCostParameters): Promise<App> {
+    return await prisma.aplicativo.update({
+      where: {
+        codigo: codApp,
+      },
+      data: {
+        custoMensal: cost,
       },
     });
   }
