@@ -8,8 +8,8 @@ import {
   Post,
 } from '@nestjs/common';
 
-import { GetClientsList_US } from 'src/application[casos-de-uso]/get-client-list.use-case';
-import { GetAppList_US } from 'src/application[casos-de-uso]/get-app-list.use-case';
+import { GetClientsList_US } from 'src/application[casos-de-uso]/list-clients.use-case';
+import { GetAppList_US } from 'src/application[casos-de-uso]/list-apps.use-case';
 import { CreateSubscription_US } from 'src/application[casos-de-uso]/create-subscription.use-case';
 
 import { Client } from 'src/domain/entities/client.entity';
@@ -17,6 +17,9 @@ import { App } from 'src/domain/entities/app.entity';
 import { SubscriptionDto } from '../dto/subscription.dto';
 import { AppDto } from '../dto/app.dto';
 import { UpdateCostApp_US } from 'src/application[casos-de-uso]/update-cost-app.use-case';
+import { Status } from 'src/domain/services/enums/subscription-status';
+import { GetSubscriptionList_US } from 'src/application[casos-de-uso]/list-subscriptions.use-case';
+import { Subscription } from 'src/domain/entities/subscription.entity';
 
 @Controller('servcad')
 @Dependencies(
@@ -24,6 +27,7 @@ import { UpdateCostApp_US } from 'src/application[casos-de-uso]/update-cost-app.
   GetAppList_US,
   CreateSubscription_US,
   UpdateCostApp_US,
+  GetSubscriptionList_US,
 )
 export class RegisterController {
   constructor(
@@ -31,6 +35,7 @@ export class RegisterController {
     private readonly getAppList_US: GetAppList_US,
     private readonly createSubscriotion_US: CreateSubscription_US,
     private readonly updateCostApp_US: UpdateCostApp_US,
+    private readonly subscriptionListByType_US: GetSubscriptionList_US,
   ) {}
 
   @Get('clientes')
@@ -59,9 +64,9 @@ export class RegisterController {
     });
   }
 
-  @Get('assinaturas/{tipo}')
-  listSubscriptions(): string {
-    return '';
+  @Get('assinaturas/:tipo')
+  async listSubscriptions(@Param('tipo') tipo): Promise<Subscription[]> {
+    return await this.subscriptionListByType_US.execute({ tipo });
   }
 
   @Get('asscli/:codcli')

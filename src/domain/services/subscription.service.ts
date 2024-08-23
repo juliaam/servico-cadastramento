@@ -3,6 +3,7 @@ import { SubscriptionDto } from 'src/interface-adapters/dto/subscription.dto';
 import { ClientRepository } from '../repositories/client.repository';
 import { SubscriptionRepository } from '../repositories/subscription.repository';
 import { AppRepository } from '../repositories/app.repository';
+import { Status } from './enums/subscription-status';
 
 @Injectable()
 export class SubscriptionService {
@@ -30,5 +31,19 @@ export class SubscriptionService {
       );
 
     return this.subscriptionRepository.create(body);
+  }
+
+  async getByType(tipo) {
+    const statusTypes = {
+      ATIVAS: 'ATIVAS',
+      TODAS: 'TODAS',
+      CANCELADAS: 'CANCELADAS',
+    };
+
+    const type = statusTypes[tipo];
+
+    if (type === 'TODAS') {
+      return await this.subscriptionRepository.findAll();
+    }
   }
 }

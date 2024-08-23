@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { RegisterController } from './interface-adapters/controllers/main.controller';
 
-import { GetClientsList_US } from './application[casos-de-uso]/get-client-list.use-case';
-import { GetAppList_US } from './application[casos-de-uso]/get-app-list.use-case';
+import { GetClientsList_US } from './application[casos-de-uso]/list-clients.use-case';
+import { GetAppList_US } from './application[casos-de-uso]/list-apps.use-case';
 
 import { PrismaClientRepository } from './interface-adapters/persistence[typeorm]/repositories/client.repository-prisma';
 import { PrismaAppRepository } from './interface-adapters/persistence[typeorm]/repositories/app.repository-prisma';
@@ -11,6 +11,7 @@ import { CreateSubscription_US } from './application[casos-de-uso]/create-subscr
 import { PrismaSubscriptionRepository } from './interface-adapters/persistence[typeorm]/repositories/subscription.repository-prisma';
 import { UpdateCostApp_US } from './application[casos-de-uso]/update-cost-app.use-case';
 import { AppService } from './domain/services/app.service';
+import { GetSubscriptionList_US } from './application[casos-de-uso]/list-subscriptions.use-case';
 
 @Module({
   controllers: [RegisterController],
@@ -42,6 +43,11 @@ import { AppService } from './domain/services/app.service';
     {
       provide: 'AppService',
       useClass: AppService,
+    },
+    GetSubscriptionList_US,
+    {
+      provide: 'SubscriptionService',
+      useClass: SubscriptionService,
     },
   ],
 })
