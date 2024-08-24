@@ -13,6 +13,8 @@ import { GetSubscriptionList_US } from './application[casos-de-uso]/list-subscri
 import { AppRepository } from './domain/repositories/app.repository';
 import { ClientRepository } from './domain/repositories/client.repository';
 import { SubscriptionRepository } from './domain/repositories/subscription.repository';
+import { GetSubscriptionListByClient_US } from './application[casos-de-uso]/get-subscriptions-by-user.use-case';
+import { GetSubscriptionListByApp_US } from './application[casos-de-uso]/get-subscription-by-app.use-case';
 
 @Module({
   controllers: [RegisterController],
@@ -38,6 +40,16 @@ import { SubscriptionRepository } from './domain/repositories/subscription.repos
       useClass: PrismaAppRepository,
     },
     GetSubscriptionList_US,
+    {
+      provide: SubscriptionRepository,
+      useClass: PrismaSubscriptionRepository,
+    },
+    GetSubscriptionListByClient_US,
+    {
+      provide: SubscriptionRepository,
+      useClass: PrismaSubscriptionRepository,
+    },
+    GetSubscriptionListByApp_US,
     {
       provide: SubscriptionRepository,
       useClass: PrismaSubscriptionRepository,

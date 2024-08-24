@@ -9,9 +9,10 @@ import { App } from 'src/domain/entities/app.entity';
 import { SubscriptionDto } from '../dto/subscription.dto';
 import { AppDto } from '../dto/app.dto';
 import { UpdateCostApp_US } from 'src/application[casos-de-uso]/update-cost-app.use-case';
-// import { Status } from 'src/domain/services/enums/subscription-status';
 import { GetSubscriptionList_US } from 'src/application[casos-de-uso]/list-subscriptions.use-case';
 import { Subscription } from 'src/domain/entities/subscription.entity';
+import { GetSubscriptionListByClient_US } from 'src/application[casos-de-uso]/get-subscriptions-by-user.use-case';
+import { GetSubscriptionListByApp_US } from 'src/application[casos-de-uso]/get-subscription-by-app.use-case';
 
 @Controller('servcad')
 export class RegisterController {
@@ -21,6 +22,8 @@ export class RegisterController {
     private readonly createSubscriotion_US: CreateSubscription_US,
     private readonly updateCostApp_US: UpdateCostApp_US,
     private readonly subscriptionListByType_US: GetSubscriptionList_US,
+    private readonly getSubscriptionListByClient_US: GetSubscriptionListByClient_US,
+    private readonly getSubscriptionListByApp_US: GetSubscriptionListByApp_US,
   ) {}
 
   @Get('clientes')
@@ -55,13 +58,15 @@ export class RegisterController {
   }
 
   @Get('asscli/:codcli')
-  listSubscriptionByUser(): string {
-    return '';
+  async listSubscriptionByClient(
+    @Param('codcli') codCli,
+  ): Promise<Subscription[]> {
+    return await this.getSubscriptionListByClient_US.execute(+codCli);
   }
 
-  @Get('assapp/:codapp')
-  listSubscriptionByApp(): string {
-    return '';
+  @Get('assapp/:codpp')
+  async listSubscriptionByApp(@Param('codpp') codApp): Promise<Subscription[]> {
+    return await this.getSubscriptionListByApp_US.execute(+codApp);
   }
 }
 

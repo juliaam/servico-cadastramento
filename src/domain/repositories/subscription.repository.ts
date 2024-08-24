@@ -12,4 +12,6 @@ export abstract class SubscriptionRepository {
     codCli: any;
     actualDate: any;
   }): Promise<Subscription>;
+  abstract findAllByClient(codCli: number): Promise<Subscription[]>;
+  abstract findAllByApp(codApp: number): Promise<Subscription[]>;
 }

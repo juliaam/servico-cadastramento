@@ -32,6 +32,7 @@ export class PrismaSubscriptionRepository implements SubscriptionRepository {
       },
     });
   }
+
   async findActiveById({
     codCli,
     actualDate,
@@ -45,6 +46,21 @@ export class PrismaSubscriptionRepository implements SubscriptionRepository {
         fimVigencia: {
           gt: actualDate,
         },
+      },
+    });
+  }
+
+  async findAllByClient(codCli: number): Promise<Subscription[]> {
+    return await prisma.assinatura.findMany({
+      where: {
+        codCli,
+      },
+    });
+  }
+  async findAllByApp(codApp: number): Promise<Subscription[]> {
+    return await prisma.assinatura.findMany({
+      where: {
+        codApp,
       },
     });
   }
