@@ -17,13 +17,14 @@ model aplicativo {
 }
 
 model assinatura {
-  codigo         Int        @id @default(autoincrement()) @db.SmallInt
-  codApp         Int        @db.SmallInt
-  codCli         Int        @db.SmallInt
-  inicioVigencia DateTime?  @default(dbgenerated("CURRENT_DATE")) @db.Date
-  fimVigencia    DateTime?  @db.Date
-  aplicativo     aplicativo @relation(fields: [codApp], references: [codigo], onDelete: NoAction, onUpdate: NoAction)
-  cliente        cliente    @relation(fields: [codCli], references: [codigo], onDelete: NoAction, onUpdate: NoAction, map: "assinatura_codCli_fkey1")
+  codigo         Int         @id @default(autoincrement()) @db.SmallInt
+  codApp         Int         @db.SmallInt
+  codCli         Int         @db.SmallInt
+  inicioVigencia DateTime?   @default(dbgenerated("CURRENT_DATE")) @db.Date
+  fimVigencia    DateTime?   @db.Date
+  aplicativo     aplicativo  @relation(fields: [codApp], references: [codigo], onDelete: NoAction, onUpdate: NoAction)
+  cliente        cliente     @relation(fields: [codCli], references: [codigo], onDelete: NoAction, onUpdate: NoAction, map: "assinatura_codCli_fkey1")
+  pagamento      pagamento[]
 }
 
 model cliente {
@@ -31,4 +32,19 @@ model cliente {
   nome       String       @db.VarChar
   email      String
   assinatura assinatura[]
+}
+
+model pagamento {
+  codigo        Int        @id @default(autoincrement()) @db.SmallInt
+  codAssinatura Int        @db.SmallInt
+  valorPago     Float
+  dataPagamento DateTime   @default(dbgenerated("CURRENT_DATE")) @db.Date
+  assinatura    assinatura @relation(fields: [codAssinatura], references: [codigo], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model usuario {
+  usuario String
+  senha   String
+
+  @@ignore
 }
