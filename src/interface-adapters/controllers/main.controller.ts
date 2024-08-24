@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Dependencies,
-  Get,
-  Param,
-  Patch,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
 import { GetClientsList_US } from 'src/application[casos-de-uso]/list-clients.use-case';
 import { GetAppList_US } from 'src/application[casos-de-uso]/list-apps.use-case';

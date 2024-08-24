@@ -13,8 +13,9 @@ export class CreateSubscription_US {
   ) {}
 
   async execute(body): Promise<Subscription> {
-    const client = await this.clientRepository.findById(body.codCli);
+    const today = new Date();
 
+    const client = await this.clientRepository.findById(body.codCli);
     if (!client)
       throw new NotFoundException(
         'Cliente não encontrado! É necessário que o cliente exista',
@@ -25,6 +26,23 @@ export class CreateSubscription_US {
       throw new NotFoundException(
         'Aplicativo não encontrado! É necessário que o aplicativo exista',
       );
+
+    const clientHasSubscription =
+      await this.subscriptionRepository.findActiveById({
+        codCli: body.codCli,
+        actualDate: today,
+      });
+
+    if (clientHasSubscription)
+      throw new NotFoundException(
+        'Esse cliente já possui uma assinatura ativa!',
+      );
+
+    console.log(clientHasSubscription);
+
+    const endSubscription = today.setDate(today.getDate() + 7);
+
+    body.fimVigencia = new Date(endSubscription);
 
     return this.subscriptionRepository.create(body);
   }
