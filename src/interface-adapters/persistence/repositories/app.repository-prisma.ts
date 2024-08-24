@@ -4,7 +4,7 @@ import {
   UpdateCostParameters,
 } from 'src/domain/repositories/app.repository';
 import { App } from 'src/domain/entities/app.entity';
-import { prisma } from 'src/interface-adapters/persistence[typeorm]/database/prisma';
+import { prisma } from 'src/interface-adapters/persistence/database/prisma';
 
 @Injectable()
 export class PrismaAppRepository implements AppRepository {

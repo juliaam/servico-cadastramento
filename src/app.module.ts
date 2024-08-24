@@ -1,20 +1,20 @@
 import { Module } from '@nestjs/common';
 import { RegisterController } from './interface-adapters/controllers/main.controller';
 
-import { GetClientsList_US } from './application[casos-de-uso]/list-clients.use-case';
-import { GetAppList_US } from './application[casos-de-uso]/list-apps.use-case';
+import { GetClientsList_US } from './application/list-clients.use-case';
+import { GetAppList_US } from './application/list-apps.use-case';
 
-import { PrismaClientRepository } from './interface-adapters/persistence[typeorm]/repositories/client.repository-prisma';
-import { PrismaAppRepository } from './interface-adapters/persistence[typeorm]/repositories/app.repository-prisma';
-import { CreateSubscription_US } from './application[casos-de-uso]/create-subscription.use-case';
-import { PrismaSubscriptionRepository } from './interface-adapters/persistence[typeorm]/repositories/subscription.repository-prisma';
-import { UpdateCostApp_US } from './application[casos-de-uso]/update-cost-app.use-case';
-import { GetSubscriptionList_US } from './application[casos-de-uso]/list-subscriptions.use-case';
+import { PrismaClientRepository } from './interface-adapters/persistence/repositories/client.repository-prisma';
+import { PrismaAppRepository } from './interface-adapters/persistence/repositories/app.repository-prisma';
+import { CreateSubscription_US } from './application/create-subscription.use-case';
+import { PrismaSubscriptionRepository } from './interface-adapters/persistence/repositories/subscription.repository-prisma';
+import { UpdateCostApp_US } from './application/update-cost-app.use-case';
+import { GetSubscriptionList_US } from './application/list-subscriptions.use-case';
 import { AppRepository } from './domain/repositories/app.repository';
 import { ClientRepository } from './domain/repositories/client.repository';
 import { SubscriptionRepository } from './domain/repositories/subscription.repository';
-import { GetSubscriptionListByClient_US } from './application[casos-de-uso]/get-subscriptions-by-user.use-case';
-import { GetSubscriptionListByApp_US } from './application[casos-de-uso]/get-subscription-by-app.use-case';
+import { GetSubscriptionListByClient_US } from './application/get-subscriptions-by-user.use-case';
+import { GetSubscriptionListByApp_US } from './application/get-subscription-by-app.use-case';
 
 @Module({
   controllers: [RegisterController],

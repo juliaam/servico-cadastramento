@@ -1,18 +1,18 @@
 import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 
-import { GetClientsList_US } from 'src/application[casos-de-uso]/list-clients.use-case';
-import { GetAppList_US } from 'src/application[casos-de-uso]/list-apps.use-case';
-import { CreateSubscription_US } from 'src/application[casos-de-uso]/create-subscription.use-case';
+import { GetClientsList_US } from 'src/application/list-clients.use-case';
+import { GetAppList_US } from 'src/application/list-apps.use-case';
+import { CreateSubscription_US } from 'src/application/create-subscription.use-case';
 
 import { Client } from 'src/domain/entities/client.entity';
 import { App } from 'src/domain/entities/app.entity';
 import { SubscriptionDto } from '../dto/subscription.dto';
 import { AppDto } from '../dto/app.dto';
-import { UpdateCostApp_US } from 'src/application[casos-de-uso]/update-cost-app.use-case';
-import { GetSubscriptionList_US } from 'src/application[casos-de-uso]/list-subscriptions.use-case';
+import { UpdateCostApp_US } from 'src/application/update-cost-app.use-case';
+import { GetSubscriptionList_US } from 'src/application/list-subscriptions.use-case';
 import { Subscription } from 'src/domain/entities/subscription.entity';
-import { GetSubscriptionListByClient_US } from 'src/application[casos-de-uso]/get-subscriptions-by-user.use-case';
-import { GetSubscriptionListByApp_US } from 'src/application[casos-de-uso]/get-subscription-by-app.use-case';
+import { GetSubscriptionListByClient_US } from 'src/application/get-subscriptions-by-user.use-case';
+import { GetSubscriptionListByApp_US } from 'src/application/get-subscription-by-app.use-case';
 
 @Controller('servcad')
 export class RegisterController {

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Payment } from 'src/domain/entities/payment.entity';
 import { PaymentRepository } from 'src/domain/repositories/payment.repository';
 
-import { prisma } from 'src/interface-adapters/persistence[typeorm]/database/prisma';
+import { prisma } from 'src/interface-adapters/persistence/database/prisma';
 
 @Injectable()
 export class PrismaPaymentRepository implements PaymentRepository {
