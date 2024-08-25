@@ -13,7 +13,7 @@ import { GetSubscriptionList_US } from './application/list-subscriptions.use-cas
 import { AppRepository } from './domain/repositories/app.repository';
 import { ClientRepository } from './domain/repositories/client.repository';
 import { SubscriptionRepository } from './domain/repositories/subscription.repository';
-import { GetSubscriptionListByClient_US } from './application/get-subscriptions-by-user.use-case';
+import { GetSubscriptionListByClient_US } from './application/get-subscriptions-by-client.use-case';
 import { GetSubscriptionListByApp_US } from './application/get-subscription-by-app.use-case';
 
 @Module({

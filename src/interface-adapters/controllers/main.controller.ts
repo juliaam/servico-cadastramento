@@ -11,7 +11,7 @@ import { AppDto } from '../dto/app.dto';
 import { UpdateCostApp_US } from 'src/application/update-cost-app.use-case';
 import { GetSubscriptionList_US } from 'src/application/list-subscriptions.use-case';
 import { Subscription } from 'src/domain/entities/subscription.entity';
-import { GetSubscriptionListByClient_US } from 'src/application/get-subscriptions-by-user.use-case';
+import { GetSubscriptionListByClient_US } from 'src/application/get-subscriptions-by-client.use-case';
 import { GetSubscriptionListByApp_US } from 'src/application/get-subscription-by-app.use-case';
 
 @Controller('servcad')

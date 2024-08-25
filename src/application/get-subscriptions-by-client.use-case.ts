@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Subscription } from 'src/domain/entities/subscription.entity';
 import { SubscriptionRepository } from 'src/domain/repositories/subscription.repository';
 
