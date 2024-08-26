@@ -8,7 +8,6 @@ datasource db {
   directUrl = env("DIRECT_URL")
 }
 
-/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model aplicativo {
   codigo      Int          @id @default(autoincrement()) @db.SmallInt
   nome        String       @db.VarChar
