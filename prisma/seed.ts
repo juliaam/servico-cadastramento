@@ -36,13 +36,37 @@ async function main() {
     const appRecords = await prisma.aplicativo.findMany();
     const clientRecords = await prisma.cliente.findMany();
 
+    const today = new Date();
+
+    const endSubscription = new Date(today.setDate(today.getDate() + 7));
+
     const subscriptions = await prisma.assinatura.createMany({
       data: [
-        { codApp: appRecords[0].codigo, codCli: clientRecords[0].codigo },
-        { codApp: appRecords[1].codigo, codCli: clientRecords[1].codigo },
-        { codApp: appRecords[2].codigo, codCli: clientRecords[2].codigo },
-        { codApp: appRecords[3].codigo, codCli: clientRecords[3].codigo },
-        { codApp: appRecords[4].codigo, codCli: clientRecords[4].codigo },
+        {
+          codApp: appRecords[0].codigo,
+          codCli: clientRecords[0].codigo,
+          fimVigencia: endSubscription,
+        },
+        {
+          codApp: appRecords[1].codigo,
+          codCli: clientRecords[1].codigo,
+          fimVigencia: endSubscription,
+        },
+        {
+          codApp: appRecords[2].codigo,
+          codCli: clientRecords[2].codigo,
+          fimVigencia: endSubscription,
+        },
+        {
+          codApp: appRecords[3].codigo,
+          codCli: clientRecords[3].codigo,
+          fimVigencia: endSubscription,
+        },
+        {
+          codApp: appRecords[4].codigo,
+          codCli: clientRecords[4].codigo,
+          fimVigencia: endSubscription,
+        },
       ],
     });
 
