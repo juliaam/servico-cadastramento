@@ -38,8 +38,6 @@ export class CreateSubscription_US {
         'Esse cliente já possui uma assinatura ativa!',
       );
 
-    console.log(clientHasSubscription);
-
     const endSubscription = today.setDate(today.getDate() + 7);
 
     body.fimVigencia = new Date(endSubscription);
