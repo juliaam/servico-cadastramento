@@ -27,10 +27,11 @@ export class CreateSubscription_US {
         'Aplicativo não encontrado! É necessário que o aplicativo exista',
       );
 
-    const clientHasSubscription =
+    const clientHasSubscription = // para que o cliente não crie uma outra assinatura com assinatura já existente nesse mesmo app
       await this.subscriptionRepository.findActiveById({
         codCli: body.codCli,
-        actualDate: today,
+        codApp: body.codApp,
+        currentDate: today,
       });
 
     if (clientHasSubscription)

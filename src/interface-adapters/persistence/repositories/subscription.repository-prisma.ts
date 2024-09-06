@@ -13,38 +13,33 @@ export class PrismaSubscriptionRepository implements SubscriptionRepository {
     return await prisma.assinatura.findMany();
   }
 
-  async findAllInactive(actualDate: any): Promise<Subscription[]> {
+  async findAllInactive(currentDate: Date): Promise<Subscription[]> {
     return await prisma.assinatura.findMany({
       where: {
         fimVigencia: {
-          lte: actualDate,
+          lte: currentDate,
         },
       },
     });
   }
 
-  async findAllActive(actualDate: any): Promise<Subscription[]> {
+  async findAllActive(currentDate: Date): Promise<Subscription[]> {
     return await prisma.assinatura.findMany({
       where: {
         fimVigencia: {
-          gt: actualDate,
+          gt: currentDate,
         },
       },
     });
   }
 
-  async findActiveById({
-    codCli,
-    actualDate,
-  }: {
-    codCli: any;
-    actualDate: any;
-  }): Promise<Subscription> {
+  async findActiveById({ codCli, codApp, currentDate }): Promise<Subscription> {
     return await prisma.assinatura.findFirst({
       where: {
         codCli,
+        codApp,
         fimVigencia: {
-          gt: actualDate,
+          gt: currentDate,
         },
       },
     });
