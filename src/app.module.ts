@@ -15,8 +15,26 @@ import { ClientRepository } from './domain/repositories/client.repository';
 import { SubscriptionRepository } from './domain/repositories/subscription.repository';
 import { GetSubscriptionListByClient_US } from './application/get-subscriptions-by-client.use-case';
 import { GetSubscriptionListByApp_US } from './application/get-subscription-by-app.use-case';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
+  imports: [
+    ClientsModule.register([
+      {
+        name: 'payment_service',
+        transport: Transport.RMQ,
+        options: {
+          urls: [
+            'amqps://kmwhllfz:OWG7biH_cT6cTcUt2cfh1dh0RIhDqV0f@jackal.rmq.cloudamqp.com/kmwhllfz',
+          ],
+          queue: 'payment_queue_send',
+          queueOptions: {
+            durable: true,
+          },
+        },
+      },
+    ]),
+  ],
   controllers: [RegisterController],
   providers: [
     GetClientsList_US,

@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Dependencies,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 
 import { GetClientsList_US } from 'src/application/list-clients.use-case';
 import { GetAppList_US } from 'src/application/list-apps.use-case';
@@ -13,7 +21,7 @@ import { GetSubscriptionList_US } from 'src/application/list-subscriptions.use-c
 import { Subscription } from 'src/domain/entities/subscription.entity';
 import { GetSubscriptionListByClient_US } from 'src/application/get-subscriptions-by-client.use-case';
 import { GetSubscriptionListByApp_US } from 'src/application/get-subscription-by-app.use-case';
-
+import { EventPattern } from '@nestjs/microservices';
 @Controller('servcad')
 export class RegisterController {
   constructor(
@@ -68,20 +76,9 @@ export class RegisterController {
   async listSubscriptionByApp(@Param('codpp') codApp): Promise<Subscription[]> {
     return await this.getSubscriptionListByApp_US.execute(+codApp);
   }
-}
 
-@Controller('registrarpagamento')
-export class PaymentController {
-  @Post()
-  register(): string {
-    return '';
-  }
-}
-
-@Controller('assinvalidas')
-export class SubscriptionController {
-  @Get()
-  listClients(): string {
-    return '';
+  @EventPattern('pattern1')
+  handlePaymentMade(data: any) {
+    console.log('evento recebido:', data);
   }
 }
