@@ -13,6 +13,14 @@ export class PrismaSubscriptionRepository implements SubscriptionRepository {
     return await prisma.assinatura.findMany();
   }
 
+  async findById(codass: number): Promise<Subscription> {
+    return await prisma.assinatura.findFirst({
+      where: {
+        codigo: codass,
+      },
+    });
+  }
+
   async findAllInactive(currentDate: Date): Promise<Subscription[]> {
     return await prisma.assinatura.findMany({
       where: {

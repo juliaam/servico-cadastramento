@@ -72,6 +72,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
       provide: SubscriptionRepository,
       useClass: PrismaSubscriptionRepository,
     },
+    PrismaSubscriptionRepository,
   ],
 })
 export class AppModule {}

@@ -21,7 +21,8 @@ import { GetSubscriptionList_US } from 'src/application/list-subscriptions.use-c
 import { Subscription } from 'src/domain/entities/subscription.entity';
 import { GetSubscriptionListByClient_US } from 'src/application/get-subscriptions-by-client.use-case';
 import { GetSubscriptionListByApp_US } from 'src/application/get-subscription-by-app.use-case';
-import { EventPattern } from '@nestjs/microservices';
+import { EventPattern, MessagePattern } from '@nestjs/microservices';
+import { PrismaSubscriptionRepository } from '../persistence/repositories/subscription.repository-prisma';
 @Controller('servcad')
 export class RegisterController {
   constructor(
@@ -32,6 +33,7 @@ export class RegisterController {
     private readonly subscriptionListByType_US: GetSubscriptionList_US,
     private readonly getSubscriptionListByClient_US: GetSubscriptionListByClient_US,
     private readonly getSubscriptionListByApp_US: GetSubscriptionListByApp_US,
+    private readonly subscriptionRepository: PrismaSubscriptionRepository,
   ) {}
 
   @Get('clientes')
@@ -77,8 +79,13 @@ export class RegisterController {
     return await this.getSubscriptionListByApp_US.execute(+codApp);
   }
 
-  @EventPattern('pattern1')
+  @EventPattern('payment')
   handlePaymentMade(data: any) {
     console.log('evento recebido:', data);
+  }
+
+  @MessagePattern('subscription')
+  returnSubscription(codAss: number) {
+    return this.subscriptionRepository.findById(+codAss);
   }
 }
