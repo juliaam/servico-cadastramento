@@ -1,0 +1,9 @@
+services:
+  postgres-db-service:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+      POSTGRES_DB: servico-cadastramento
+    ports:
+      - "5434:5432"
